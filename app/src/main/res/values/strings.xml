@@ -4,4 +4,5 @@
     <string name="answer">Answer</string>
     <string name="challenging_message">I have a challenge for you, my Lord!!</string>
     <string name="add_to_leitner">Add to leitner</string>
+    <string name="count_card_left">Count of Cards in box is %1$d</string>
 </resources>
