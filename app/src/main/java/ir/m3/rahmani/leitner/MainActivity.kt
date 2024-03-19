@@ -5,10 +5,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.fragment.app.Fragment
 import ir.m3.rahmani.leitner.databinding.ActivityMainBinding
-import ir.m3.rahmani.leitner.feature.add_card.FragmentAddCard
-import ir.m3.rahmani.leitner.feature.home.FragmentHome
+import ir.m3.rahmani.leitner.feature.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,11 +23,12 @@ class MainActivity : AppCompatActivity() {
       insets
     }
 
-    val fragmentHome = FragmentHome()
-    val fragmentAddCard = FragmentAddCard()
+
+    // Go to Home fragment
+    val fragmentHome = HomeFragment()
     binding.flMain.apply {
       supportFragmentManager.beginTransaction()
-        .replace(binding.flMain.id, fragmentAddCard)
+        .replace(binding.flMain.id, fragmentHome)
         .commit()
     }
 
