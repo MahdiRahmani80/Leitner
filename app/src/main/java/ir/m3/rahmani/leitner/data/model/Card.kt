@@ -12,8 +12,8 @@ data class Card(
   val nextReviewDate: Long
 ) {
   init {
-    cardValidate(question)
-    cardValidate(answer)
+    cardValidate(question, Label.QUESTION)
+    cardValidate(answer, Label.ANSWER)
   }
 }
 
@@ -35,9 +35,13 @@ fun Card.asCardEntity() = CardEntity(
   nextReviewDate = nextReviewDate
 )
 
-private fun cardValidate(str:String){
+private fun cardValidate(str: String, label: Label) {
   if (str.isEmpty() || str.length < 3)
-    throw ValidateException(CARD_VALIDATION_MESSAGE)
+    throw ValidateException(label.name + CARD_VALIDATION_MESSAGE)
 }
 
-private const val CARD_VALIDATION_MESSAGE = "question/answer is empty or less than 3 chars."
+private enum class Label {
+  QUESTION, ANSWER
+}
+
+private const val CARD_VALIDATION_MESSAGE = " is empty or less than 3 chars."
