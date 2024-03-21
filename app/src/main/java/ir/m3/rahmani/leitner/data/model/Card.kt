@@ -1,19 +1,27 @@
 package ir.m3.rahmani.leitner.data.model
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Fts4
-import androidx.room.PrimaryKey
+
 import ir.m3.rahmani.leitner.data.local.entities.CardEntity
-import java.util.Calendar
-import java.util.Date
+import ir.m3.rahmani.leitner.utils.ValidateException
+
 
 data class Card(
   val id: Int,
   val question: String,
   val answer: String,
   val nextReviewDate: Long
-)
+) {
+  init {
+    // Question validation
+    if (question.isEmpty() || question.length < 3)
+      throw ValidateException(QUESTION_VALIDATION_MESSAGE)
+
+    // Answer validation
+    if (answer.isEmpty() || answer.length < 3)
+      throw ValidateException(ANSWER_VALIDATION_MESSAGE)
+
+  }
+}
 
 /**
  * Converts the local model to the external model for use
@@ -29,6 +37,9 @@ fun CardEntity.asExternalModel() = Card(
 fun Card.asCardEntity() = CardEntity(
   id = id,
   question = question,
-  answer=answer,
-  nextReviewDate= nextReviewDate
+  answer = answer,
+  nextReviewDate = nextReviewDate
 )
+
+private const val QUESTION_VALIDATION_MESSAGE = "question is empty or less than 3 chars."
+private const val ANSWER_VALIDATION_MESSAGE = "answer is empty or less than 3 chars."
